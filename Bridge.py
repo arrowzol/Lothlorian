@@ -1,4 +1,3 @@
-from mcpi.minecraft import Minecraft
 import math
 
 GOLD = 41
@@ -47,7 +46,9 @@ def bridge(mc, x1, y1, z1, x2, y2, z2, width=4, railings=True):
 
 
 if __name__ == "__main__":
-    mc = Minecraft.create()
-    pos = mc.player.getPos()
-    bridge(mc, pos.x-10, pos.y+10, pos.z-10, pos.x+10, pos.y+14, pos.z+15, 4)
+    import remoteMCServer
 
+    mc = remoteMCServer.create("")
+
+    pos = mc.player.getPos()
+    bridge(mc, pos.x-10, pos.y+2, pos.z-10, pos.x+10, pos.y+5, pos.z+15, 4)

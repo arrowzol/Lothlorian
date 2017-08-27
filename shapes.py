@@ -1,9 +1,7 @@
-import remoteMCServer
 from math import pi, sin, cos, ceil
-from mcpi.minecraft import Minecraft
-mc = remoteMCServer.create("")
 
-def spiral(x, y, z, radius, height=0, turns=1, start=0, btype=41):
+
+def spiral(mc, x, y, z, radius, height=0, turns=1, start=0, btype=41):
     start *= 2*pi/360
     end = start + 2*pi*turns
     if radius < 1:
@@ -54,5 +52,9 @@ x = round(pos.x)
 z = round(pos.z)
 y = round(pos.y)
 
-for blahdy in range(5):
-    spiral(x, y, z, 15 + blahdy, 256, 5)
+if __name__ == "__main__":
+    import remoteMCServer
+    mc = remoteMCServer.create("")
+
+    for blahdy in range(5):
+        spiral(mc, x, y, z, 15 + blahdy, 256, 5)
