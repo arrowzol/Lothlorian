@@ -3,16 +3,14 @@ from math import pi, sin, cos, ceil
 
 def spiral(mc, x, y, z, radius, height=0, turns=1, start=0, btype=41):
     start *= 2*pi/360
-    end = start + 2*pi*turns
     if radius < 1:
         mc.setBlocks(x, y, z, x, y + height, z, btype)
     radSquordy = radius**2
     yy = int(round(y))
 
-    distance = int(ceil(1.01*2*pi*radius*turns))
+    distance = int(ceil(1.01*2*pi*radius*abs(turns)))
     px = int(round(x + radius))
     pz = int(round(z))
-
 
     for i in range(distance + 1):
         if i == 0:
@@ -47,14 +45,23 @@ def spiral(mc, x, y, z, radius, height=0, turns=1, start=0, btype=41):
             pz = zz
 
 
-pos = mc.player.getPos()
-x = round(pos.x)
-z = round(pos.z)
-y = round(pos.y)
-
 if __name__ == "__main__":
     import remoteMCServer
     mc = remoteMCServer.create("")
 
-    for blahdy in range(5):
-        spiral(mc, x, y, z, 15 + blahdy, 256, 5)
+    import Bridge
+
+    pos = mc.player.getPos()
+    x = round(pos.x)
+    z = round(pos.z)
+    y = round(pos.y)
+
+
+    h = 20
+    r = 5
+    l=30
+
+    Bridge.bridge(mc, x, y+h, z, x, y+h, z+l, width=5)
+    for i in range(5):
+        spiral(mc, x-r-3, y, z, r + i, height=h, turns=2)
+        spiral(mc, x-r-3, y, z+l, r + i, height=h, turns=-2)
