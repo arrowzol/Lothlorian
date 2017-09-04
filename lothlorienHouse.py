@@ -2,12 +2,23 @@ from mcpi.minecraft import Minecraft
 import mcpi.block as block
 import random
 
-def buildHouse(mc,x,y,z,width):
+def buildHouse(mc,ctrx,y,ctrz,width):
 
     height = width
-    length = int(width * 1.4)
+    length = int(width)
+    
+    # Find the corner
+    x = ctrx - int(width / 2)
+    z = ctrz - int(length / 2)
+
+
     air = 0
     doorx = x + int(width * 0.5)
+
+
+
+
+
 
     #make a cuboid
     mc.setBlocks(x, y, z, x + width-1, y + height-1, z + length-1, 5,2)
