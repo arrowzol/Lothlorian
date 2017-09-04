@@ -3,9 +3,9 @@ import math
 
 GOLD = 41
 LEAVES = 18
+TNT = 49
 
-
-def line(mc, x1, y1, z1, x2, y2, z2):
+def line(mc, x1, y1, z1, x2, y2, z2, btype=GOLD, stype=None):
     dx = x2 - x1
     dy = y2 - y1
     dz = z2 - z1
@@ -17,10 +17,13 @@ def line(mc, x1, y1, z1, x2, y2, z2):
     dz /= steps
 
     for i in range(steps + 1):
-        mc.setBlock(x1 + dx*i, y1 + dy*i, z1 + dz*i, GOLD)
+        if stype:
+            mc.setBlock(x1 + dx*i, y1 + dy*i, z1 + dz*i, btype, stype)
+        else:
+            mc.setBlock(x1 + dx*i, y1 + dy*i, z1 + dz*i, btype)
 
 
-def bridge(mc, x1, y1, z1, x2, y2, z2, width=4, railings=True):
+def bridge(mc, x1, y1, z1, x2, y2, z2, width=4, railings=True, btype=GOLD, stype=None):
     # calculate distance between two points, in 2D
     dx = x2 - x1
     dz = z2 - z1
@@ -41,9 +44,9 @@ def bridge(mc, x1, y1, z1, x2, y2, z2, width=4, railings=True):
     # railings
     if railings:
         i = -width*2
-        line(mc, x1 + ux * i, y1 + 2, z1 + uz * i, x2 + ux * i, y2 + 2, z2 + uz * i)
+        line(mc, x1 + ux * i, y1 + 2, z1 + uz * i, x2 + ux * i, y2 + 2, z2 + uz * i, btype, stype)
         i = width*2
-        line(mc, x1 + ux * i, y1 + 2, z1 + uz * i, x2 + ux * i, y2 + 2, z2 + uz * i)
+        line(mc, x1 + ux * i, y1 + 2, z1 + uz * i, x2 + ux * i, y2 + 2, z2 + uz * i, btype, stype)
 
 
 if __name__ == "__main__":
