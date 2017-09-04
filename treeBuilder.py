@@ -1,6 +1,5 @@
 import remoteMCServer
 
-mc = remoteMCServer.create("")
 import math
 from mcpi.minecraft import Minecraft
 
@@ -80,6 +79,7 @@ def treeBuilder(x, y, z, scale):
         makeCircle(mc, x, y, z, scale, (17, 2))
         y += 1
     buildSphere(mc, x, y, z, 3 * scale)
+    mc = remoteMCServer.create("")
 
 
 treeBuilder(142, 25, 26, 5)
