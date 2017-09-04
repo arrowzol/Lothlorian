@@ -32,7 +32,9 @@ def buildHouse(mc,x,y,z,width):
     mc.setBlocks(x, y + 2, z + 2, x, y + 3, z + int(5/7 * length), 102)
     mc.setBlocks(x + width - 1, y + 2, z + 2, x + width - 1, y + 3, z + int(5 / 7 * length), 102)
     #porch with rail and step
-    mc.setBlocks(x, y, z, x + width - 1, y, z - 3, 5,2)
-    mc.setBlocks(x, y, z - 3, x - 3, y, z + length - 1, 5,2)
+    mc.setBlocks(x - 2, y, z - 2, x + width + 1, y, z + length + 1, 5,2)
+
     #mc.setBlocks(x + width - 1)
+
+
 
