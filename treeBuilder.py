@@ -75,7 +75,7 @@ def buildSphere(mc, x, y, z, r=10, blockType=(18, 6)):
 
 
 def treeBuilder(mc, x, y, z, scale):
-    for i in range(40 + (scale * 3)):
+    for i in range(30 + (scale * 3)):
         makeCircle(mc, x, y, z, scale, (17, 2))
         y += 1
     buildSphere(mc, x, y, z, 3 * scale)
