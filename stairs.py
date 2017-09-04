@@ -1,7 +1,7 @@
 from math import pi, sin, cos, ceil
 
 
-def spiral(mc, x, y, z, radius, height=0, turns=1, start=0, btype=41):
+def spiral(mc, x, y, z, radius, height=0, turns=1, start=0):
     start *= 2*pi/360
     if radius < 1:
         mc.setBlocks(x, y, z, x, y + height, z, 17, 2)
@@ -44,7 +44,7 @@ def spiral(mc, x, y, z, radius, height=0, turns=1, start=0, btype=41):
             pz = zz
 
 
-def stais(radius, width, height=0, turns=1, start=0, btype=17, railings=False):
+def stais(radius, width, height=0, turns=1, start=0, railings=False):
     import remoteMCServer
     mc = remoteMCServer.create("")
 
@@ -54,10 +54,10 @@ def stais(radius, width, height=0, turns=1, start=0, btype=17, railings=False):
     y = round(pos.y)
 
     for stair in range(width):
-        spiral(mc, x, y, z, radius + stair, height, turns, start, btype)
+        spiral(mc, x, y, z, radius + stair, height, turns, start)
 
     if railings == True:
-        spiral(mc, x, y + 2, z, radius - 1, height, turns, start, btype)
-        spiral(mc, x, y + 2, z, radius + width, height, turns, start, btype)
+        spiral(mc, x, y + 2, z, radius - 1, height, turns, start)
+        spiral(mc, x, y + 2, z, radius + width, height, turns, start)
 
 stais(5, 5, 50, 2, 0, True)
