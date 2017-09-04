@@ -4,7 +4,7 @@
 
 import remoteMCServer
 
-import lothlorienHouse
+import lothlorienHouse, treeBuilder
 
 mc = remoteMCServer.create("")
 
@@ -14,5 +14,7 @@ x = round(pos.x)
 z = round(pos.z)
 y = round(pos.y)
 
-lothlorienHouse.buildHouse(mc, x, y, z, 10)
-lothlorienHouse.buildHouse(mc, x + 50, y + 10, z + 32, 20)
+
+def treeHouse(mc, x, y, z):
+    treeBuilder.treeBuilder(mc, x, y, z, 2)
+    lothlorienHouse.buildHouse(mc, x - 2, y + 52, z  - 3, 5)
