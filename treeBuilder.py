@@ -81,5 +81,13 @@ def treeBuilder(mc, x, y, z, scale):
     buildSphere(mc, x, y, z, 3 * scale)
     mc = remoteMCServer.create("")
 
+def intregralTreeBuilder(mc, x, input, z, scale):
+    input() = treeHeight
+    for i in range(treeHeight + scale *3):
+        makeCircle(mc, x, y, z, sclae, (17, 2))
+        y += 1
+        buildSphere(mc, x, y, x, 3 * scale)
+        mc = remoteMCServer.create("")
+
 
 treeBuilder(142, 25, 26, 5)
