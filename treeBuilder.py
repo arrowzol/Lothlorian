@@ -74,20 +74,21 @@ def buildSphere(mc, x, y, z, r=10, blockType=(18, 6)):
                     mc.setBlock(ix, iy, iz, blockType)
 
 
-def treeBuilder(mc, x, y, z, scale):
-    for i in range(30 + (scale * 3)):
-        makeCircle(mc, x, y, z, scale, (17, 2))
+def treeBuilder(mc, x, y, z, treeRadius = 2, treeHeight = 30, leafRadius = 7):
+    for i in range(treeHeight):
+        makeCircle(mc, x, y, z, treeRadius, (17, 2))
         y += 1
-    buildSphere(mc, x, y, z, 3 * scale)
+    buildSphere(mc, x, y, z, r = leafRadius)
+    return y + leafRadius
+
+def integralTreeBuilder(mc, x, y, z, treeHeight):
+    for i in range(y + treeHeight):
+        makeCircle(mc, x, y, z, treeHeight / 3, (17, 2))
+        y += 1
+        buildSphere(mc, x, y, x, treeHeight)
+
+if __name__ == "__main__":
     mc = remoteMCServer.create("")
-
-def intregralTreeBuilder(mc, x, input, z, scale):
-    input() = treeHeight
-    for i in range(treeHeight + scale *3):
-        makeCircle(mc, x, y, z, sclae, (17, 2))
-        y += 1
-        buildSphere(mc, x, y, x, 3 * scale)
-        mc = remoteMCServer.create("")
-
-
-treeBuilder(142, 25, 26, 5)
+    finalHeight = treeBuilder(mc, 500, 4, 500)
+    mc.setBlock(500, finalHeight, 500, 46)
+    #integralTreeBuilder(mc, 1000000, 44, 1000000)
