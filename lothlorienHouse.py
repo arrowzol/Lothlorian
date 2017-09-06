@@ -1,12 +1,15 @@
+#Mason J. Settergren
 from mcpi.minecraft import Minecraft
 import mcpi.block as block
 import math
+
+
 
 def buildHouse(mc,ctrx,y,ctrz,width=7):
 
     height = width
     length = int(width)
-    
+
     # Find the corner
     x = ctrx - int(width / 2)
     z = ctrz - int(length / 2)
@@ -49,6 +52,12 @@ def buildHouse(mc,ctrx,y,ctrz,width=7):
             if dx*dx + dz*dz <= r*r:#pythagoras
                 mc.setBlock(ctrx + dx,y,ctrz + dz, 5,2)
 
+if __name__ == "__main__":
+    import remoteMCServer
+    mc = remoteMCServer.create("")
+    #Clear out area before testing again
+    mc.setBlocks(-20,4,-20,20,20,20,0)
+    buildHouse(mc, 0, 4, 0)
 
 
 
