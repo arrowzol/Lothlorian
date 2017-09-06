@@ -2,7 +2,7 @@ from mcpi.minecraft import Minecraft
 import mcpi.block as block
 import math
 
-def buildHouse(mc,ctrx,y,ctrz,width):
+def buildHouse(mc,ctrx,y,ctrz,width=7):
 
     height = width
     length = int(width)
@@ -48,7 +48,7 @@ def buildHouse(mc,ctrx,y,ctrz,width):
         for dz in range(-r,r+1):
             if dx*dx + dz*dz <= r*r:#pythagoras
                 mc.setBlock(ctrx + dx,y,ctrz + dz, 5,2)
-    
+
 
 
 

@@ -20,7 +20,7 @@ z = 100000
 
 def treeHouse(mc, x, y, z):
     treeTop = treeBuilder.treeBuilder(mc, x, y, z)
-    lothlorienHouse.buildHouse(mc, x, treeTop, z, 5)
+    lothlorienHouse.buildHouse(mc, x, treeTop, z)
     return treeTop
 
 treeTop1 = treeHouse(mc, x + 10, y, z)
