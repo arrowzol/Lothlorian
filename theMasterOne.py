@@ -4,7 +4,7 @@
 
 import remoteMCServer
 
-import lothlorienHouse, treeBuilder, Bridge
+import lothlorienHouse, treeBuilder, stairs
 
 mc = remoteMCServer.create("")
 
@@ -14,15 +14,18 @@ x = round(pos.x)
 z = round(pos.z)
 y = round(pos.y)
 
-x = 100100
-y = 4
-z = 100000
+# x = 1000000
+# y = 4
+# z = 1000000
+
 
 def treeHouse(mc, x, y, z):
     treeTop = treeBuilder.treeBuilder(mc, x, y, z)
     lothlorienHouse.buildHouse(mc, x, treeTop, z)
     return treeTop
 
-treeTop1 = treeHouse(mc, x + 10, y, z)
-treeTop2 = treeHouse(mc, x + 30, y, z + 60)
-Bridge.bridge(mc, x + 10, treeTop1, z, x + 30, treeTop2, z + 60, 17, railings=False)
+treeTop = treeHouse(mc, x, y, z)
+for daOne in range(3):
+    stairs.stairs(x, y + 1 + daOne, z, 6, 3, 0, False, height=treeTop - y, turns=4)
+    stairs.stairs(x, y + 1 + daOne, z, 6, 3, 0, False, height=treeTop - y, turns=4)
+stairs.stairs(x, y, z, 6, 3, 17, 2, treeTop - y, 4)

@@ -1,10 +1,13 @@
 from math import pi, sin, cos, ceil
 
 
-def spiral(mc, x, y, z, radius, height=0, turns=1, start=0):
+def spiral(mc, x, y, z, radius, btype, subtype, height=0, turns=1, start=0):
     start *= 2*pi/360
     if radius < 1:
-        mc.setBlocks(x, y, z, x, y + height, z, 17, 2)
+        if subtype == False:
+            mc.setBlocks(x, y, z, x, y + height, z, btype, subtype)
+        else:
+            mc.setBlocks(x, y, z, x, y + height, z, btype, subtype)
     radius_squared = radius**2
     yy = int(round(y))
 
@@ -24,8 +27,12 @@ def spiral(mc, x, y, z, radius, height=0, turns=1, start=0):
         dy = (yy + i/distance*height) - py
 
         if not i or dx or dz:
-            mc.setBlock(xx, yy + i/distance*height, zz, 17, 2)
-            mc.setBlocks(xx, yy + i/distance*height, zz, xx, yy + i/distance*height + dy, zz, 17, 2)
+            if subtype == False:
+                mc.setBlock(xx, yy + i / distance * height, zz, btype)
+                mc.setBlocks(xx, yy + i / distance * height, zz, xx, yy + i / distance * height + dy, zz, btype)
+            else:
+                mc.setBlock(xx, yy + i/distance*height, zz,  btype, subtype)
+                mc.setBlocks(xx, yy + i/distance*height, zz, xx, yy + i/distance*height + dy, zz,  btype, subtype)
             if i and dx and dz:
                 mx = px + dx/2 - x
                 mz = pz + dz/2 - z
@@ -37,27 +44,23 @@ def spiral(mc, x, y, z, radius, height=0, turns=1, start=0):
                     delta_px = (dx + dz)/2
                     delta_pz = (dz - dx)/2
 
-                mc.setBlock(px + delta_px, yy + i/distance*height, pz + delta_pz, 17, 2)
+                if subtype == False:
+                    mc.setBlock(px + delta_px, yy + i / distance * height, pz + delta_pz, btype)
+                else:
+                    mc.setBlock(px + delta_px, yy + i/distance*height, pz + delta_pz,  btype, subtype)
 
             py = yy + i/distance*height
             px = xx
             pz = zz
 
 
-def stais(radius, width, height=0, turns=1, start=0, railings=False):
+def stairs(x, y, z, radius, width, btype, subtype, height=0, turns=1, start=0, railings=False):
     import remoteMCServer
     mc = remoteMCServer.create("")
 
-    pos = mc.player.getPos()
-    x = round(pos.x)
-    z = round(pos.z)
-    y = round(pos.y)
-
     for stair in range(width):
-        spiral(mc, x, y, z, radius + stair, height, turns, start)
+        spiral(mc, x, y, z, radius + stair, btype, subtype, height, turns, start)
 
     if railings == True:
         spiral(mc, x, y + 2, z, radius - 1, height, turns, start)
         spiral(mc, x, y + 2, z, radius + width, height, turns, start)
-
-stais(5, 5, 50, 2, 0, True)

@@ -44,13 +44,36 @@ def spiral(mc, x, y, z, radius, height=0, turns=1, start=0, btype=41):
             pz = zz
 
 
+def circle(mc, x, y, z, radious, btype):
+    spiral(mc, x, y, z, radious, btype=btype)
+
+
+def dome(mc, x, y, z, radius, btype):
+    distance = ceil(1.01 * pi * radius)
+
+    for i in range(int(distance)+1):
+        theta = (i * pi / distance - pi / 2)
+        print("theta %f"%theta)
+        xx = radius * cos(theta)
+        yy = radius * sin(theta)
+
+        circle(mc, x, y + yy, z, xx, btype)
+
+
+def cone(mc, x, y, z, height, btype, dy = 1):
+    for thingy in range(height):
+        circle(mc, x, y + thingy * dy, z, height - thingy, btype)
+    mc.setBlock(x, y + height * dy, z, btype)
+
+
+
 if __name__ == "__main__":
     import remoteMCServer
-    mc = remoteMCServer.create("")
+    mc2 = remoteMCServer.create("")
 
     import Bridge
 
-    pos = mc.player.getPos()
+    pos = mc2.player.getPos()
     x = round(pos.x)
     z = round(pos.z)
     y = round(pos.y)
@@ -62,12 +85,12 @@ if __name__ == "__main__":
     numOfSpirals = 3
 
     for i in range(numOfSpirals):
-        spiral(mc, x - r - 3, y, z + 1, r + i, height=h, turns=-2)
+        spiral(mc2, x - r - 3, y, z + 1, r + i, height=h, turns=-2)
 
     railings = True
     if railings:
-        spiral(mc, x - r - 3, y + 2, z + 1, r + i + 1, height=h, turns=-2)
-        spiral(mc, x - r - 3, y + 2, z + 1, r - 1, height=h, turns=-2)
+        spiral(mc2, x - r - 3, y + 2, z + 1, r + i + 1, height=h, turns=-2)
+        spiral(mc2, x - r - 3, y + 2, z + 1, r - 1, height=h, turns=-2)
     # Bridge.bridge(mc, x, y+h, z, x, y+h, z+l, width=5)
     # for i in range(5):
     #     spiral(mc, x-r-3, y, z, r + i, height=h, turns=2)
